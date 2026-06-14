@@ -23,6 +23,22 @@
     --surface: rgba(255,255,255,0.98);
     --nav-h: 80px;
   }
+
+  :root[data-theme="dark"] {
+    --bg: #0a0f0d;
+    --surface: #121614;
+    --text: #e8f0eb;
+    --muted: #94a89f;
+    --white: #1a1f1d;
+    --off: #0f1510;
+    --border: rgba(124,255,157,0.15);
+    --card: rgba(20,25,23,0.94);
+    --g: #00E676;
+    --g2: #7CFF9D;
+    --g3: #1a4d2e;
+    --gsoft: rgba(124,255,157,0.12);
+    --glow: rgba(124,255,157,0.25);
+  }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   html, body, * {
@@ -37,6 +53,7 @@
     background: var(--bg);
     color: var(--text);
     overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6, .nav-logo-text, .footer-logo, .btn, .team-card h3, .step-item h3, .plan-name {
@@ -69,7 +86,11 @@
     background: rgba(255,255,255,0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    transition: background 0.3s;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  :root[data-theme="dark"] nav {
+    background: rgba(10, 15, 13, 0.95);
+    border-bottom-color: rgba(124, 255, 157, 0.1);
   }
   .nav-logo {
     display: flex; align-items: center; gap: 10px;
@@ -82,6 +103,10 @@
     display: flex; align-items: center; justify-content: center;
     overflow: hidden;
     box-shadow: 0 0 0 3px rgba(255,255,255,0.12);
+    transition: box-shadow 0.3s;
+  }
+  :root[data-theme="dark"] .nav-logo-icon {
+    box-shadow: 0 0 0 3px rgba(0, 230, 102, 0.15);
   }
   .nav-logo-icon svg { color: #fff; width: 24px; height: 24px; }
   .nav-logo-icon img {
@@ -94,8 +119,12 @@
     font-size: 18px;
     color: var(--text);
     letter-spacing: -0.5px;
+    transition: color 0.3s;
   }
   .nav-logo-text span { color: var(--g); }
+  :root[data-theme="dark"] .nav-logo-text {
+    color: rgba(232, 240, 235, 0.95);
+  }
   .nav-links {
     display: flex; gap: 36px; margin: 0 auto;
   }
@@ -107,8 +136,15 @@
     letter-spacing: -0.2px;
   }
   .nav-links a:hover { color: var(--g2); }
+  :root[data-theme="dark"] .nav-links a {
+    color: rgba(232, 240, 235, 0.75);
+  }
+  :root[data-theme="dark"] .nav-links a:hover {
+    color: var(--g2);
+  }
   .nav-cta {
     display: flex; gap: 12px; align-items: center;
+    transition: all 0.3s ease;
   }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
@@ -142,6 +178,7 @@
     color: #fff;
     box-shadow: 0 4px 20px var(--glow);
     z-index: 1;
+    transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
   }
   .btn-green:hover {
     background: #00b84a;
@@ -150,6 +187,9 @@
   }
   .btn-green:active {
     transform: translateY(-1px) scale(0.98);
+  }
+  :root[data-theme="dark"] .btn-green {
+    color: #0a0f0d;
   }
   .btn-outline {
     background: transparent;
@@ -163,6 +203,14 @@
     color: var(--g2);
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(124,255,157,0.2);
+  }
+  :root[data-theme="dark"] .btn-outline {
+    color: rgba(232, 240, 235, 0.9);
+    border-color: rgba(124, 255, 157, 0.25);
+  }
+  :root[data-theme="dark"] .btn-outline:hover {
+    border-color: var(--g2);
+    color: var(--g2);
   }
   .btn-white {
     background: #fff;
@@ -184,6 +232,51 @@
     transform: translateY(-2px);
   }
   .btn-lg { padding: 16px 36px; font-size: 16px; }
+
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 12px;
+  }
+  :root[data-theme="dark"] .theme-toggle {
+    background: rgba(0, 230, 102, 0.1);
+    border-color: rgba(0, 230, 102, 0.35);
+  }
+  .theme-toggle:hover {
+    background: rgba(0, 230, 102, 0.12);
+    border-color: rgba(0, 230, 102, 0.35);
+    transform: scale(1.08);
+  }
+  :root[data-theme="dark"] .theme-toggle:hover {
+    background: rgba(0, 230, 102, 0.18);
+    border-color: rgba(0, 230, 102, 0.5);
+  }
+  .theme-toggle svg {
+    width: 22px;
+    height: 22px;
+    color: var(--text);
+    transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+  }
+  .theme-toggle svg.sun {
+    display: block;
+  }
+  :root[data-theme="dark"] .theme-toggle svg.sun {
+    display: none;
+  }
+  .theme-toggle svg.moon {
+    display: none;
+  }
+  :root[data-theme="dark"] .theme-toggle svg.moon {
+    display: block;
+  }
 
   .hamburger {
     display: none;
@@ -300,10 +393,17 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
   }
+  :root[data-theme="dark"] .trust-bar {
+    border-top: 1px solid rgba(124, 255, 157, 0.1);
+    border-bottom: 1px solid rgba(124, 255, 157, 0.1);
+  }
   .trust-item {
     text-align: center;
     padding: 12px 20px;
     border-right: 1px solid rgba(7,27,17,0.08);
+  }
+  :root[data-theme="dark"] .trust-item {
+    border-right-color: rgba(124, 255, 157, 0.15);
   }
   .trust-item:last-child { border-right: none; }
   .trust-num {
@@ -317,6 +417,9 @@
   .trust-label {
     font-size: 13px; color: rgba(7,27,17,0.65);
     font-weight: 400; letter-spacing: 0.3px;
+  }
+  :root[data-theme="dark"] .trust-label {
+    color: rgba(232, 240, 235, 0.55);
   }
 
   /* ── SECTION BASE ── */
@@ -334,6 +437,12 @@
   .eyebrow::before {
     content: '';
     width: 24px; height: 2px; background: var(--g);
+  }
+  :root[data-theme="dark"] .eyebrow {
+    color: var(--g2);
+  }
+  :root[data-theme="dark"] .eyebrow::before {
+    background: var(--g2);
   }
   h2.section-h {
     font-family: 'Unbounded', sans-serif;
@@ -843,6 +952,10 @@
     border-radius: 38px;
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 36px 72px rgba(0,0,0,0.2);
   }
+  :root[data-theme="dark"] .cta-band {
+    background: radial-gradient(circle at top, rgba(58, 214, 120, 0.15), transparent 24%),
+      linear-gradient(180deg, #0a2e18 0%, #0d3320 42%, #081f14 100%);
+  }
   .cta-band::before {
     content: '';
     position: absolute; inset: 0;
@@ -899,6 +1012,9 @@
     border: 1px solid rgba(124,255,157,0.3);
     background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
   }
+  :root[data-theme="dark"] .app-flyer-frame {
+    background: linear-gradient(135deg, rgba(26, 31, 29, 0.95), rgba(18, 22, 20, 0.98));
+  }
   .app-flyer-frame::before {
     content: '';
     position: absolute;
@@ -937,6 +1053,13 @@
     border-color: var(--g2);
     transform: translateX(8px);
   }
+  :root[data-theme="dark"] .showcase-feature {
+    background: rgba(0, 230, 102, 0.06);
+    border-color: rgba(0, 230, 102, 0.15);
+  }
+  :root[data-theme="dark"] .showcase-feature:hover {
+    background: rgba(0, 230, 102, 0.1);
+  }
   .showcase-feature svg {
     width: 28px;
     height: 28px;
@@ -956,6 +1079,12 @@
     color: var(--muted);
     line-height: 1.5;
   }
+  :root[data-theme="dark"] .showcase-feature h4 {
+    color: rgba(232, 240, 235, 0.9);
+  }
+  :root[data-theme="dark"] .showcase-feature p {
+    color: rgba(232, 240, 235, 0.6);
+  }
 
   /* ── COLLECTOR CTA ── */
   .collector-strip {
@@ -965,6 +1094,9 @@
     padding: 48px 56px;
     display: flex; align-items: center; justify-content: space-between; gap: 40px;
     margin: 0 6% 80px;
+  }
+  :root[data-theme="dark"] .collector-strip {
+    background: rgba(0, 230, 102, 0.06);
   }
   .collector-strip h3 {
     font-family: 'Unbounded', sans-serif;
@@ -999,15 +1131,25 @@
     display: flex; align-items: center; justify-content: center;
     overflow: hidden;
   }
+  :root[data-theme="dark"] .footer-logo-icon {
+    background: rgba(0, 230, 102, 0.1);
+    border: 1px solid rgba(0, 230, 102, 0.25);
+  }
   .footer-logo-icon svg, .footer-logo-icon img { width: 100%; height: 100%; }
   .footer-logo-icon img { object-fit: cover; display: block; }
   .footer-desc { font-size: 14px; color: rgba(7,27,17,0.72); line-height: 1.7; max-width: 280px; }
+  :root[data-theme="dark"] .footer-desc {
+    color: rgba(232, 240, 235, 0.65);
+  }
   footer h5 {
     font-family: 'Syne', sans-serif;
     font-size: 13px; font-weight: 700;
     letter-spacing: 1.5px; text-transform: uppercase;
     color: rgba(7,27,17,0.6);
     margin-bottom: 20px;
+  }
+  :root[data-theme="dark"] footer h5 {
+    color: rgba(232, 240, 235, 0.5);
   }
   .footer-col a {
     display: block; text-decoration: none;
@@ -1017,6 +1159,9 @@
     transition: color 0.2s;
   }
   .footer-col a:hover { color: var(--g); }
+  :root[data-theme="dark"] .footer-col a {
+    color: rgba(232, 240, 235, 0.7);
+  }
   .footer-bottom {
     border-top: 1px solid rgba(7,27,17,0.08);
     padding-top: 28px;
@@ -1024,6 +1169,9 @@
     flex-wrap: wrap; gap: 12px;
   }
   .footer-bottom p { font-size: 13px; color: rgba(7,27,17,0.55); }
+  :root[data-theme="dark"] .footer-bottom p {
+    color: rgba(232, 240, 235, 0.5);
+  }
   .footer-bottom .heart { color: var(--g); }
 
   /* ── REVEAL ANIMATION ── */
@@ -1203,6 +1351,75 @@
       scroll-behavior: auto !important;
     }
   }
+
+  /* ── DARK THEME SPECIFIC STYLES ── */
+  :root[data-theme="dark"] .btn-outline {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text);
+  }
+  :root[data-theme="dark"] .btn-outline:hover {
+    border-color: var(--g2);
+  }
+  :root[data-theme="dark"] .btn-white {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--g2);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+  }
+  :root[data-theme="dark"] .btn-white:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  :root[data-theme="dark"] .faq-item {
+    background: var(--white);
+    border-color: rgba(124, 255, 157, 0.1);
+  }
+  :root[data-theme="dark"] .price-card {
+    background: var(--white);
+    border-color: rgba(124, 255, 157, 0.15);
+  }
+  :root[data-theme="dark"] .team-card {
+    background: var(--white);
+    border-color: rgba(124, 255, 157, 0.15);
+  }
+  :root[data-theme="dark"] .feat-card {
+    background: var(--white);
+    border-color: rgba(124, 255, 157, 0.15);
+  }
+  :root[data-theme="dark"] .tl-content {
+    background: var(--white);
+    border-color: rgba(124, 255, 157, 0.15);
+  }
+  :root[data-theme="dark"] .value-item {
+    background: var(--white);
+    border-color: rgba(124, 255, 157, 0.15);
+  }
+  :root[data-theme="dark"] .value-item h4 {
+    color: var(--text);
+  }
+  :root[data-theme="dark"] #back-to-top {
+    background: rgba(0, 230, 102, 0.1);
+    color: var(--g);
+    border-color: rgba(124, 255, 157, 0.3);
+  }
+  :root[data-theme="dark"] #back-to-top:hover {
+    background: rgba(0, 230, 102, 0.15);
+  }
+  :root[data-theme="dark"] .price-cmp {
+    background: var(--white);
+    border-color: rgba(124, 255, 157, 0.15);
+  }
+  :root[data-theme="dark"] .price-cmp th {
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text);
+  }
+  :root[data-theme="dark"] .price-cmp td {
+    border-color: rgba(124, 255, 157, 0.1);
+  }
+  :root[data-theme="dark"] .step-circle {
+    background: var(--white);
+  }
+  :root[data-theme="dark"] .mobile-menu {
+    background: rgba(10, 15, 13, 0.96);
+  }
 </style>
 </head>
 <body>
@@ -1255,6 +1472,10 @@
   <div class="nav-cta">
     <a href="#contact" class="btn btn-outline">Contact</a>
     <a href="#contact" class="btn btn-green">Get The App</a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+      <svg class="sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1m-16 0H1m15.364 1.636l.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <svg class="moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+    </button>
   </div>
   <button class="hamburger" onclick="openMobile()">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -1782,6 +2003,38 @@
 <button id="back-to-top" aria-label="Back to top">↑</button>
 
 <script>
+  // ── THEME TOGGLE ──
+  const html = document.documentElement;
+  
+  // Check for saved theme preference or system preference, default to light
+  function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    let theme = savedTheme;
+    
+    // If no saved theme, check system preference
+    if (!theme) {
+      theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    html.setAttribute('data-theme', theme);
+    return theme;
+  }
+  
+  const currentTheme = initTheme();
+  
+  // Handle theme toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  }
+
   // ── CURSOR ──
   const cursor = document.getElementById('cursor');
   const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches || navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
@@ -1847,12 +2100,22 @@
     if (!isScrolling) {
       isScrolling = true;
       requestAnimationFrame(() => {
-        nav.style.background = lastScrollY > 60
-          ? 'rgba(255,255,255,0.97)'
-          : 'rgba(255,255,255,0.85)';
-        nav.style.boxShadow = lastScrollY > 60
-          ? '0 4px 30px rgba(0,0,0,0.08)'
-          : 'none';
+        const theme = html.getAttribute('data-theme') || 'light';
+        if (theme === 'dark') {
+          nav.style.background = lastScrollY > 60
+            ? 'rgba(10, 15, 13, 0.98)'
+            : 'rgba(10, 15, 13, 0.95)';
+          nav.style.boxShadow = lastScrollY > 60
+            ? '0 4px 30px rgba(0, 230, 102, 0.1)'
+            : 'none';
+        } else {
+          nav.style.background = lastScrollY > 60
+            ? 'rgba(255,255,255,0.97)'
+            : 'rgba(255,255,255,0.85)';
+          nav.style.boxShadow = lastScrollY > 60
+            ? '0 4px 30px rgba(0,0,0,0.08)'
+            : 'none';
+        }
         isScrolling = false;
       });
     }
