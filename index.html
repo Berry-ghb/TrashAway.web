@@ -1373,7 +1373,6 @@
     .about-grid { grid-template-columns: 1fr; gap: 48px; }
     .steps-grid { grid-template-columns: 1fr 1fr; }
     .steps-grid::before { display: none; }
-    
     .feat-card:hover {
       transform: translateY(-8px);
     }
@@ -1382,7 +1381,11 @@
     }
   }
   @media (max-width: 768px) {
-    .nav-links, .nav-cta { display: none; }
+    .nav-links { display: none; }
+    .nav-cta { display: flex; gap: 12px; align-items: center; }
+    .nav-cta .btn { display: none; }
+    .theme-toggle { display: flex; }
+    .theme-toggle { z-index: 2100; }
     .hamburger { display: flex; align-items: center; }
     .hero-content { padding: 0 18px; }
     #hero { min-height: 72vh; padding-top: calc(var(--nav-h) + 14px); }
